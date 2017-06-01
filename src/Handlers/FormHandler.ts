@@ -19,8 +19,11 @@ export class FormHandler {
             let statusCodeIndicator = document.getElementsByClassName('stat__response-status')[0];
             statusCodeIndicator.innerHTML = `${data.status} ${data.statusText}`;
 
+            let timeTakenIndicator = document.getElementsByClassName('stat__time-taken')[0];
+            timeTakenIndicator.innerHTML = `${data.timeTaken}ms`;
+
             let responseBody = document.getElementsByClassName('response-card__body')[0];
-            responseBody.innerHTML = data.response;
+            responseBody.innerHTML = data.content;
 
             console.log(data);
         });
