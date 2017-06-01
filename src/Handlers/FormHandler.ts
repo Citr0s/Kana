@@ -17,7 +17,7 @@ export class FormHandler {
         let httpClient = new HttpClient();
         httpClient.get(url.value, (data) => {
             let statusCodeIndicator = document.getElementsByClassName('stat__response-status')[0];
-            statusCodeIndicator.innerHTML = `${data.status} ${data.statusText}`;
+            statusCodeIndicator.innerHTML = `<span class="_${data.status}">${data.status} ${data.statusText}</span>`;
 
             let timeTakenIndicator = document.getElementsByClassName('stat__time-taken')[0];
             timeTakenIndicator.innerHTML = `${data.timeTaken}<small>ms</small>`;

@@ -7,6 +7,18 @@ body {
   small {
     color: #666;
   }
+
+  span[class*="_2"] {
+    color: #4caf50;
+  }
+
+  span[class*="_4"] {
+    color: #fb8c00;
+  }
+
+  span[class*="_5"] {
+    color: #ff5722;
+  }
 }
 
 .page-content {
