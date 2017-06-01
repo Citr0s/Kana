@@ -20,7 +20,10 @@ export class FormHandler {
             statusCodeIndicator.innerHTML = `${data.status} ${data.statusText}`;
 
             let timeTakenIndicator = document.getElementsByClassName('stat__time-taken')[0];
-            timeTakenIndicator.innerHTML = `${data.timeTaken}ms`;
+            timeTakenIndicator.innerHTML = `${data.timeTaken}<small>ms</small>`;
+
+            let responseSizeIndicator = document.getElementsByClassName('stat__response-size')[0];
+            responseSizeIndicator.innerHTML = `${data.contentSize}<small>B</small>`;
 
             let responseBody = document.getElementsByClassName('response-card__body')[0];
             responseBody.innerHTML = data.content;

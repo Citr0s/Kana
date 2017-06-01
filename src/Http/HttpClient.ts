@@ -1,6 +1,7 @@
 import { HttpResponse } from "../Types/HttpResponse";
 import { Stopwatch } from "../Helpers/Stopwatch";
 import { StatusCodeMapper } from "../Mappers/StatusCodeMapper";
+import { SizeCalculator } from "../Helpers/SizeCalculator";
 
 export class HttpClient {
     private _httpClient: XMLHttpRequest;
@@ -23,15 +24,16 @@ export class HttpClient {
     }
 
     private _handleResponse(callback: any) {
-        let response = new HttpResponse();
-
         if (this._httpClient.readyState === 4) {
             this._stopWatch.stop();
 
-            response.status = this._httpClient.status;
-            response.statusText = StatusCodeMapper.map(this._httpClient.status);
-            response.content = this._httpClient.response;
-            response.timeTaken = this._stopWatch.result();
+            let response = {
+                status: this._httpClient.status,
+                statusText: StatusCodeMapper.map(this._httpClient.status),
+                content: this._httpClient.response,
+                timeTaken: this._stopWatch.result(),
+                contentSize: SizeCalculator.bytesFrom(this._httpClient.response)
+            };
 
             callback(response);
         }

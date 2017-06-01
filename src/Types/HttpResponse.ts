@@ -3,5 +3,5 @@ export class HttpResponse {
     statusText: string;
     content: any;
     timeTaken: number;
-
+    contentSize: number;
 }
