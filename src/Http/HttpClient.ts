@@ -16,11 +16,7 @@ export class HttpClient {
 
     private _handleResponse(callback: any) {
         if (this._httpClient.readyState === 4) {
-            if (this._httpClient.status === 200) {
-                callback(this._httpClient.responseText);
-            } else {
-                callback(this._httpClient.status);
-            }
+            callback(this._httpClient);
         }
     }
 }

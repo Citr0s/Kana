@@ -4,12 +4,77 @@
     <meta charset="UTF-8">
     <title>Kana</title>
     <link rel="stylesheet" href="dist/renderer.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-pink.min.css"/>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- https://getmdl.io/ -->
 </head>
 <body>
 </body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+                <span class="mdl-chip">
+                    <span class="mdl-chip__text stat__time-taken">Time Taken</span>
+                </span>
+                <span class="mdl-chip">
+                    <span class="mdl-chip__text stat__response-status">Response Status</span>
+                </span>
+                <span class="mdl-chip">
+                    <span class="mdl-chip__text stat__response-size">Response Size</span>
+                </span>
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Kana</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <div class="mdl-card mdl-shadow--2dp request-card">
+                <div class="mdl-card__supporting-text request-card__form-wrapper">
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--11-col">
+                            <form action="#">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label request-card__url">
+                                    <input class="mdl-textfield__input request-card__url-input" type="text" id="url"
+                                           value="https://ci.miloszdura.com/api/usage">
+                                    <label class="mdl-textfield__label" for="url">URL</label>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="mdl-cell mdl-cell--1-col request-card__button-wrapper">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent request-card__submit-button">
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-card mdl-shadow--2dp response-card">
+                <div class="mdl-card__supporting-text response-card__form-wrapper">
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col response-card__body">
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
 <script>
-    // You can also require other files to run in this process
     require('./dist/renderer.js')
 </script>
 </html>
