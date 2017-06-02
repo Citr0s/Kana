@@ -4,10 +4,11 @@ Messing around with Electron
 
 #### To Run
 ##### `yarn` in root folder to install required packages
-##### `gulp` in root folder to compile and listen for changes
+##### `gulp` in root folder to compile project
 ##### `npm start` in root folder to start app
 
 #### Advaned
+##### `gulp watch` in root folder to compile and listen for changes
 ##### `gulp build` in root folder to build only
 ##### `gulp ts` in root folder to build typescript only
 ##### `gulp sass` in root folder to build sass only
