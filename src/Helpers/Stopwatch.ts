@@ -15,6 +15,6 @@ export class Stopwatch {
     }
 
     result() {
-        return this._end - this._start;
+        return this._end.valueOf() - this._start.valueOf();
     }
 }
