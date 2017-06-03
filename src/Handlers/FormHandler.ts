@@ -26,7 +26,16 @@ export class FormHandler {
             responseSizeIndicator.innerHTML = `${data.contentSize}<small>B</small>`;
 
             let responseBody = document.getElementsByClassName('response-card__body')[0];
-            responseBody.innerHTML = data.content;
+            responseBody.innerHTML = `<h4>Response</h4> ${data.content}`;
+
+            let responseHeadersHtml = "<h4>Headers</h4>";
+
+            for (let key in data.headers) {
+                responseHeadersHtml += `<p><strong>${data.headers[key].name}:</strong> ${data.headers[key].value}</p>`;
+            }
+
+            let responseHeaders = document.getElementsByClassName('response-card__headers')[0];
+            responseHeaders.innerHTML = responseHeadersHtml;
 
             console.log(data);
         });

@@ -2,6 +2,7 @@ import { HttpResponse } from "../Types/HttpResponse";
 import { Stopwatch } from "../Helpers/Stopwatch";
 import { StatusCodeMapper } from "../Mappers/StatusCodeMapper";
 import { SizeCalculator } from "../Helpers/SizeCalculator";
+import { HttpResponseHeadersMapper } from "../Mappers/HttpResponseHeadersMapper";
 
 export class HttpClient {
     private _httpClient: XMLHttpRequest;
@@ -27,13 +28,13 @@ export class HttpClient {
         if (this._httpClient.readyState === 4) {
             this._stopWatch.stop();
 
-            let response = {
-                status: this._httpClient.status,
-                statusText: StatusCodeMapper.map(this._httpClient.status),
-                content: this._httpClient.response,
-                timeTaken: this._stopWatch.result(),
-                contentSize: SizeCalculator.bytesFrom(this._httpClient.response)
-            };
+            let response = new HttpResponse();
+            response.status = this._httpClient.status;
+            response.statusText = StatusCodeMapper.map(this._httpClient.status);
+            response.content = this._httpClient.response;
+            response.timeTaken = this._stopWatch.result();
+            response.contentSize = SizeCalculator.bytesFrom(this._httpClient.response);
+            response.headers = HttpResponseHeadersMapper.map(this._httpClient.getAllResponseHeaders().split('\r\n'));
 
             callback(response);
         }
