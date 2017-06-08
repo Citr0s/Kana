@@ -1,3 +1,5 @@
+declare let ace: any;
+
 import { FormHandler } from "./Handlers/FormHandler";
 import { ResponseMenuHandler } from "./Handlers/ResponseMenuHandler";
 

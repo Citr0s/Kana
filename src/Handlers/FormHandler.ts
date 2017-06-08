@@ -28,7 +28,7 @@ export class FormHandler {
             let responseSizeIndicator = document.getElementsByClassName('stat__response-size')[0];
             responseSizeIndicator.innerHTML = `${data.contentSize}<small>B</small>`;
 
-            this._editor.setValue(JSON.stringify(JSON.parse(data.content), null, '\t'));
+            this._editor.setValue(JSON.stringify(JSON.parse(data.content), null, '\t'), -1);
 
             let responseHeadersHtml = '';
             for (let key in data.headers) {
