@@ -17,6 +17,9 @@ export class FormHandler {
         if (url.value.length <= 0)
             return;
 
+        let spinner = document.getElementsByClassName('request-card__spinner')[0];
+        spinner.setAttribute('style', 'opacity:1;');
+
         let httpClient = new HttpClient();
         httpClient.get(url.value, (data) => {
             let statusCodeIndicator = document.getElementsByClassName('stat__response-status')[0];
@@ -28,7 +31,15 @@ export class FormHandler {
             let responseSizeIndicator = document.getElementsByClassName('stat__response-size')[0];
             responseSizeIndicator.innerHTML = `${data.contentSize}<small>B</small>`;
 
-            this._editor.setValue(JSON.stringify(JSON.parse(data.content), null, '\t'), -1);
+            let parsedBody = data.content;
+
+            try {
+                parsedBody = JSON.stringify(JSON.parse(data.content), null, '\t');
+            } catch (e) {
+                // do nothing
+            }
+
+            this._editor.setValue(parsedBody, -1);
 
             let responseHeadersHtml = '';
             for (let key in data.headers) {
@@ -37,6 +48,8 @@ export class FormHandler {
 
             let responseHeaders = document.getElementsByClassName('response-card__headers')[0];
             responseHeaders.innerHTML = responseHeadersHtml;
+
+            spinner.setAttribute('style', 'opacity:0;');
         });
     }
 }
