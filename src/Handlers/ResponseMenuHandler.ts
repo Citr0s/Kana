@@ -31,7 +31,7 @@ export class ResponseMenuHandler {
         for (let key in availableElements) {
             if (typeof buttons[key] !== 'object')
                 continue;
-            
+
             if (!availableElements[key].classList.contains('hide-element'))
                 availableElements[key].classList.add('hide-element');
 
@@ -39,7 +39,5 @@ export class ResponseMenuHandler {
                 availableElements[key].classList.remove('hide-element');
 
         }
-
-        console.log(buttons[index].getAttribute('data-item'));
     }
 }

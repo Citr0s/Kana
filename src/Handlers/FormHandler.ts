@@ -1,7 +1,10 @@
 import { HttpClient } from "../Http/HttpClient";
 
 export class FormHandler {
-    constructor() {
+    private _editor: any;
+
+    constructor(editor: any) {
+        this._editor = editor;
         let button = document.getElementsByClassName('request-card__submit-button')[0];
         button.addEventListener('click', () => {
             this.handleButtonPress();
@@ -25,11 +28,9 @@ export class FormHandler {
             let responseSizeIndicator = document.getElementsByClassName('stat__response-size')[0];
             responseSizeIndicator.innerHTML = `${data.contentSize}<small>B</small>`;
 
-            let responseBody = document.getElementsByClassName('response-card__body')[0];
-            responseBody.innerHTML = `${data.content}`;
+            this._editor.setValue(JSON.stringify(JSON.parse(data.content), null, '\t'));
 
             let responseHeadersHtml = '';
-
             for (let key in data.headers) {
                 responseHeadersHtml += `<p><strong>${data.headers[key].name}:</strong> ${data.headers[key].value}</p>`;
             }
