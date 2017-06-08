@@ -9,9 +9,3 @@ editor.getSession().setMode("ace/mode/json");
 
 new FormHandler(editor);
 new ResponseMenuHandler();
-
-document.onreadystatechange = function () {
-    if (document.readyState == 'complete') {
-        console.log('ready');
-    }
-}
