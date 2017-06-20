@@ -7,16 +7,18 @@ import { HttpResponseHeadersMapper } from "../Mappers/HttpResponseHeadersMapper"
 export class HttpClient {
     private _httpClient: XMLHttpRequest;
     private _stopWatch: Stopwatch;
+    private _url: string;
 
-    constructor() {
+    constructor(url: string) {
         this._httpClient = new XMLHttpRequest();
         this._stopWatch = new Stopwatch();
+        this._url = url;
     }
 
-    get(url: string, callback: any) {
+    get(callback: any) {
         this._stopWatch.start();
 
-        this._httpClient.open('GET', url);
+        this._httpClient.open('GET', this._url);
         this._httpClient.send(null);
 
         this._httpClient.onreadystatechange = () => {

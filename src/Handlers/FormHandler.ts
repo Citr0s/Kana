@@ -13,15 +13,19 @@ export class FormHandler {
 
     handleButtonPress() {
         let url = <HTMLFormElement>document.getElementsByClassName('request-card__url-input')[0];
+        let requestType = <HTMLFormElement>document.getElementsByClassName('mdl-textfield__input')[0];
 
         if (url.value.length <= 0)
+            return;
+
+        if (requestType.value.length <= 0)
             return;
 
         let spinner = document.getElementsByClassName('request-card__spinner')[0];
         spinner.setAttribute('style', 'opacity:1;');
 
-        let httpClient = new HttpClient();
-        httpClient.get(url.value, (data) => {
+        let httpClient = new HttpClient(url.value);
+        httpClient.get((data) => {
             let statusCodeIndicator = document.getElementsByClassName('stat__response-status')[0];
             statusCodeIndicator.innerHTML = `<span class="_${data.status}">${data.status} ${data.statusText}</span>`;
 
