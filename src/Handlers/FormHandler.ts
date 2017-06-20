@@ -2,6 +2,7 @@ import { HttpClient } from "../Http/HttpClient";
 
 export class FormHandler {
     private _editor: any;
+    private _spinner: Element;
 
     constructor(editor: any) {
         this._editor = editor;
@@ -9,6 +10,7 @@ export class FormHandler {
         button.addEventListener('click', () => {
             this.handleButtonPress();
         });
+        this._spinner = document.getElementsByClassName('request-card__spinner')[0];
     }
 
     handleButtonPress() {
@@ -21,39 +23,40 @@ export class FormHandler {
         if (requestType.value.length <= 0)
             return;
 
-        let spinner = document.getElementsByClassName('request-card__spinner')[0];
-        spinner.setAttribute('style', 'opacity:1;');
+        this._spinner.setAttribute('style', 'opacity:1;');
 
         let httpClient = new HttpClient(url.value);
-        httpClient.get((data) => {
-            let statusCodeIndicator = document.getElementsByClassName('stat__response-status')[0];
-            statusCodeIndicator.innerHTML = `<span class="_${data.status}">${data.status} ${data.statusText}</span>`;
+        httpClient.get((data) => this.handleResponse(data));
+    }
 
-            let timeTakenIndicator = document.getElementsByClassName('stat__time-taken')[0];
-            timeTakenIndicator.innerHTML = `${data.timeTaken}<small>ms</small>`;
+    handleResponse(data) {
+        let statusCodeIndicator = document.getElementsByClassName('stat__response-status')[0];
+        statusCodeIndicator.innerHTML = `<span class="_${data.status}">${data.status} ${data.statusText}</span>`;
 
-            let responseSizeIndicator = document.getElementsByClassName('stat__response-size')[0];
-            responseSizeIndicator.innerHTML = `${data.contentSize}<small>B</small>`;
+        let timeTakenIndicator = document.getElementsByClassName('stat__time-taken')[0];
+        timeTakenIndicator.innerHTML = `${data.timeTaken}<small>ms</small>`;
 
-            let parsedBody = data.content;
+        let responseSizeIndicator = document.getElementsByClassName('stat__response-size')[0];
+        responseSizeIndicator.innerHTML = `${data.contentSize}<small>B</small>`;
 
-            try {
-                parsedBody = JSON.stringify(JSON.parse(data.content), null, '\t');
-            } catch (e) {
-                // do nothing
-            }
+        let parsedBody = data.content;
 
-            this._editor.setValue(parsedBody, -1);
+        try {
+            parsedBody = JSON.stringify(JSON.parse(data.content), null, '\t');
+        } catch (e) {
+            // do nothing
+        }
 
-            let responseHeadersHtml = '';
-            for (let key in data.headers) {
-                responseHeadersHtml += `<p><strong>${data.headers[key].name}:</strong> ${data.headers[key].value}</p>`;
-            }
+        this._editor.setValue(parsedBody, -1);
 
-            let responseHeaders = document.getElementsByClassName('response-card__headers')[0];
-            responseHeaders.innerHTML = responseHeadersHtml;
+        let responseHeadersHtml = '';
+        for (let key in data.headers) {
+            responseHeadersHtml += `<p><strong>${data.headers[key].name}:</strong> ${data.headers[key].value}</p>`;
+        }
 
-            spinner.setAttribute('style', 'opacity:0;');
-        });
+        let responseHeaders = document.getElementsByClassName('response-card__headers')[0];
+        responseHeaders.innerHTML = responseHeadersHtml;
+
+        this._spinner.setAttribute('style', 'opacity:0;');
     }
 }
