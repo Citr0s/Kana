@@ -25,8 +25,8 @@ export class FormHandler {
 
         this._spinner.setAttribute('style', 'opacity:1;');
 
-        let httpClient = new HttpClient(url.value);
-        httpClient.get((data) => this.handleResponse(data));
+        let httpClient = new HttpClient(url.value, requestType.value);
+        httpClient.invoke((data) => this.handleResponse(data));
     }
 
     handleResponse(data) {

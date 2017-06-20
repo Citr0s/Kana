@@ -8,17 +8,19 @@ export class HttpClient {
     private _httpClient: XMLHttpRequest;
     private _stopWatch: Stopwatch;
     private _url: string;
+    private _requestType: string;
 
-    constructor(url: string) {
+    constructor(url: string, requestType: string) {
+        this._url = url;
+        this._requestType = requestType;
         this._httpClient = new XMLHttpRequest();
         this._stopWatch = new Stopwatch();
-        this._url = url;
     }
 
-    get(callback: any) {
+    invoke(callback: any) {
         this._stopWatch.start();
 
-        this._httpClient.open('GET', this._url);
+        this._httpClient.open(this._requestType, this._url);
         this._httpClient.send(null);
 
         this._httpClient.onreadystatechange = () => {

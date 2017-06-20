@@ -63,3 +63,8 @@ body {
   height: 50vh;
   width: 100%;
 }
+
+.mdl-layout__header-row .mdl-textfield__input {
+  width: 150px !important;
+  border-bottom: none !important;
+}

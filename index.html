@@ -14,16 +14,13 @@
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
-                <input class="mdl-textfield__input" type="text" id="request-type" value="GET" readonly
-                       tabIndex="-1">
-                <label for="request-type" class="mdl-textfield__label">TYPE</label>
-                <ul for="request-type" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                    <li class="mdl-menu__item">GET</li>
-                    <li class="mdl-menu__item">POST</li>
-                    <li class="mdl-menu__item">PUT</li>
-                    <li class="mdl-menu__item">PATCH</li>
-                    <li class="mdl-menu__item">DELETE</li>
-                </ul>
+                <select class="mdl-textfield__input">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="PATCH">PATCH</option>
+                    <option value="DELETE">DELETE</option>
+                </select>
             </div>
             <div class="mdl-layout-spacer"></div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right stat">
